@@ -1,9 +1,11 @@
 * {
-  font-family: arial,sans-serif;
+  font-family: arial, sans-serif;
   margin: 0;
+  color: #f9f8f6;
 }
 
-body, body > div {
+body,
+body > div {
   height: 100vh;
   width: 100vw;
 }
@@ -19,8 +21,17 @@ body, body > div {
 }
 
 #navbar {
+  background-color: #7c9982;
+  box-shadow: 0px 5px solid #f9f8f6;
   padding: 2em;
+  margin: 5px;
   justify-content: space-evenly;
+  align-items: center;
+  color: #f9f8f6;
+}
+#nav-link {
+  text-decoration: none;
+  color: #f9f8f6;
 }
 
 #main-section {
@@ -30,16 +41,78 @@ body, body > div {
 #main-section > div {
   width: 100%;
   display: flex;
+}
+
+#home {
+  display: flex;
+  height: 400px;
+  color: Black;
+  background-color: #7c9982;
+  margin: 5px;
   align-items: center;
+  flex-direction: column;
+}
+.posts {
+  display: flex;
+  color: Black;
+  background-color: #7c9982;
+  margin: 5px;
+  flex-direction: row;
+}
+.register {
+  color: Black;
+  background-color: #7c9982;
+  margin: 5px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form {
+  height: 100px;
+  width: 40%;
+
+  flex-direction: column;
+  margin: 20px;
 }
 
-.red {
-  background-color: #B05F6D;
-  color: white;
+button {
+  color: black;
 }
 
-.blue {
-  background-color: #275DB3;
-  color: white;
+#postss {
+  display: flex;
+  border: 1px solid #f9f8f6;
+  margin: 10px;
+  color: #f9f8f6;
+
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  color: black;
+}
+
+#Profile {
+  color: Black;
+  background-color: #7c9982;
+  margin: 5px;
+  flex-direction: row;
+}
+#newpost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 50%;
 }
