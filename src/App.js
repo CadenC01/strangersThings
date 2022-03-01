@@ -15,6 +15,7 @@ const App = (props) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [msgs, setMsgs] = useState([]);
 
   const fetchposts = async () => {
     if (localStorage.getItem("token")) {
@@ -30,6 +31,23 @@ const App = (props) => {
       const responce = await fetch(API + `posts`);
       const info = await responce.json();
       setPosts(info.data.posts);
+    }
+  };
+
+  const fetchMsg = async () => {
+    if (localStorage.getItem("token")) {
+      const responce = await fetch(API + `posts`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const info = await responce.json();
+      setMsgs(info.data.posts);
+    } else {
+      const responce = await fetch(API + `posts`);
+      const info = await responce.json();
+      setMsgs(info.data.posts);
     }
   };
 
@@ -103,7 +121,12 @@ const App = (props) => {
           <Login setToken={setToken} />
         </Route>
         <Route exact path="/Profile">
-          <Profile token={token} posts={posts} />
+          <Profile
+            token={token}
+            posts={posts}
+            fetchposts={fetchposts}
+            user={user}
+          />
         </Route>
       </div>
     </div>

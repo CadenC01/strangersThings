@@ -4,12 +4,16 @@ import { API } from "./App";
 const Profile = (props) => {
   const posts = props.posts;
   const token = props.token;
+  const user = props.user;
+  const fetchposts = props.fetchposts;
+  const msgs = user.messages;
 
   const [title, setTitle] = useState("");
   const [description, setDesc] = useState("");
   const [price, setPrice] = useState("");
 
   const handleDelete = (e) => {
+    console.log("DELETEDs");
     fetch(`${API}/posts/${e}`, {
       method: "DELETE",
       headers: {
@@ -19,8 +23,10 @@ const Profile = (props) => {
     });
   };
 
-  const handleNewP = (e) => {
-    fetch(`${API}/posts`, {
+  const handleNewP = async (e) => {
+    e.preventDefault();
+    console.log("clcs");
+    await fetch(`${API}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +40,9 @@ const Profile = (props) => {
         },
       }),
     });
+    await fetchposts();
   };
+  console.log(msgs);
 
   useEffect(() => {}, []);
   return (
@@ -68,12 +76,24 @@ const Profile = (props) => {
                 <h1 className="post-title">{e.title}</h1>
                 <p className="post-desc">{e.description}</p>
                 <p className="post-desc">{e.price}</p>
-                <button type="button" onClick={handleDelete(e._id)}>
+                <button type="button" onClick={() => handleDelete(e._id)}>
                   Delete Post
                 </button>
               </div>
             );
           }
+        })}
+      </div>
+      <div className="msgs">
+        <h1>Messages:</h1>
+        {msgs.map((msg) => {
+          console.log(msg.fromUser.username);
+          return (
+            <div key={msg._id}>
+              <p>{msg.content}</p>
+              <p>From: {msg.fromUser.username}</p>
+            </div>
+          );
         })}
       </div>
     </div>

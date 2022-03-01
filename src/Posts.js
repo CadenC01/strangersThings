@@ -6,10 +6,12 @@ import { useEffect } from "react";
 const Posts = (props) => {
   const posts = props.posts;
   const token = props.token;
+
   const [message, setMessage] = useState("");
 
-  const sendMessage = (id) => {
-    fetch(`${API}/posts/${id}/${message}`, {
+  const sendMessage = async (e, id) => {
+    e.preventDefault();
+    const sendM = await fetch(`${API}/posts/${id}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,19 +23,21 @@ const Posts = (props) => {
         },
       }),
     });
+    const data = await sendM.json();
+    console.log(data);
   };
 
   return (
     <div className="posts">
       <div id="columnp">
-        {posts.map((e) => {
+        {posts.map((post) => {
           return (
-            <div key={e._id} id="postss">
-              <h1 className="post-title">{e.title}</h1>
-              <p className="post-desc">{e.description}</p>
-              <p className="post-desc">{e.price}</p>
+            <div key={post._id} id="postss">
+              <h1 className="post-title">{post.title}</h1>
+              <p className="post-desc">{post.description}</p>
+              <p className="post-desc">{post.price}</p>
               {token ? (
-                <form onSubmit={sendMessage(e._id)}>
+                <form onSubmit={(e) => sendMessage(e, post._id)}>
                   <input
                     required
                     minLength={4}
